@@ -57,35 +57,12 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-danger btn-block btn-flat"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
-                </div>
-                <div class="col-xs-6">
-                    <?php echo anchor('#', '<i class="fa fa-eye-slash" aria-hidden="true"></i> Lupa Password', array('class' => 'btn btn-primary btn-block btn-flat')); ?>
-                </div>
-            </div>
-            <!-- /.col -->
-
-
-            <!-- /.col -->
-            <div class="row" style="margin-top: 20px;">
                 <div class="col-xs-12">
-                    <div class="callout callout-info">
-                        <h4>Level Super Admin</h4>
-
-                        <p><b>Email</b> : nuris.akbar@gmail.com</p>
-                        <p><b>Password</b> : password</p>
-                        <hr>
-                        <h4>Level Admin</h4>
-
-                        <p><b>Email</b> : hafid@gmail.com</p>
-                        <p><b>Password</b> : password</p>
-                    </div>
+                    <button type="submit" class="btn btn-success btn-block btn-flat"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
                 </div>
             </div>
+            <!-- /.col -->
             </form>
-
-
         </div>
         <!-- /.login-box-body -->
     </div>
