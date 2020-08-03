@@ -1,6 +1,6 @@
 <section class="sidebar">
     <!-- search form -->
-    <form action="#" method="get" class="sidebar-form">
+    <!-- <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Search...">
             <span class="input-group-btn">
@@ -8,7 +8,7 @@
                 </button>
             </span>
         </div>
-    </form>
+    </form> -->
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
@@ -22,7 +22,7 @@
             $id_user_level = $this->session->userdata('id_user_level');
             $sql_menu = "SELECT * 
             FROM tbl_menu 
-            WHERE id_menu in(select id_menu from tbl_hak_akses where id_user_level=$id_user_level) and is_main_menu=0 and is_aktif='y'";
+            WHERE id_menu in(select id_menu from tbl_hak_akses where id_user_level=$id_user_level) and is_main_menu=0 and is_aktif='y' ORDER BY orderation ASC";
         } else {
             $sql_menu = "select * from tbl_menu where is_aktif='y' and is_main_menu=0";
         }
@@ -33,25 +33,51 @@
             // chek is have sub menu
             $this->db->where('is_main_menu', $menu->id_menu);
             $this->db->where('is_aktif', 'y');
+            $this->db->order_by('orderation', 'asc');
+
             $submenu = $this->db->get('tbl_menu');
             if ($submenu->num_rows() > 0) {
+
+                $record = [];
+                foreach ($submenu->result() as $sub) {
+                    if ($this->uri->segment(1) == $sub->url) {
+                        $record[] = $sub->url;
+                    }
+                }
+                if (!empty($record)) {
+                    $active_parent = 'active menu-open';
+                    $active_display = 'block';
+                } else {
+                    $active_parent = '';
+                    $active_display = 'none';
+                }
                 // display sub menu
-                echo "<li class='treeview'>
+                echo "<li class='treeview " . $active_parent . "'>
                         <a href='#'>
                             <i class='$menu->icon'></i> <span>" . strtoupper($menu->title) . "</span>
                             <span class='pull-right-container'>
                                 <i class='fa fa-angle-left pull-right'></i>
                             </span>
                         </a>
-                        <ul class='treeview-menu' style='display: none;'>";
+                        <ul class='treeview-menu' style='display: " . $active_display . ";'>";
                 foreach ($submenu->result() as $sub) {
-                    echo "<li>" . anchor($sub->url, "<i class='$sub->icon'></i> " . strtoupper($sub->title)) . "</li>";
+                    if ($this->uri->segment(1) == $sub->url) {
+                        $active_sub = 'active';
+                    } else {
+                        $active_sub = '';
+                    }
+                    echo "<li class='" . $active_sub . "'>" . anchor($sub->url, "<i class='$sub->icon'></i> " . strtoupper($sub->title)) . "</li>";
                 }
                 echo " </ul>
                     </li>";
             } else {
+                if ($this->uri->segment(1) == $menu->url) {
+                    $active = 'active';
+                } else {
+                    $active = '';
+                }
                 // display main menu
-                echo "<li>";
+                echo "<li class='" . $active . "'>";
                 echo anchor($menu->url, "<i class='" . $menu->icon . "'></i> " . strtoupper($menu->title));
                 echo "</li>";
             }
