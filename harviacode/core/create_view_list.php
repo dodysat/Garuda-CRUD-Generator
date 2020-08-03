@@ -124,5 +124,3 @@ $string .= "\n\t    </div>
 
 
 $hasil_view_list = createFile($string, $target."views/" . $c_url . "/" . $v_list_file);
-
-?>

@@ -6,7 +6,7 @@
                 <div class="box box-warning box-solid">
 
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA HAK AKSES UNTUK LEVEL :  <b><?php echo $level['nama_level'] ?></b></h3>
+                        <h3 class="box-title">KELOLA HAK AKSES UNTUK LEVEL : <b><?php echo $level['nama_level'] ?></b></h3>
                     </div>
 
                     <div class="box-body">
@@ -24,7 +24,7 @@
                                         echo "<tr>
                         <td>$no</td>
                         <td>$m->title</td>
-                        <td align='center'><input type='checkbox' ".  checked_akses($this->uri->segment(3), $m->id_menu)." onClick='kasi_akses($m->id_menu)'></td>
+                        <td align='center'><input type='checkbox' " .  checked_akses($this->uri->segment(3), $m->id_menu) . " onClick='kasi_akses($m->id_menu)'></td>
                         </tr>";
                                         $no++;
                                     }
@@ -43,19 +43,18 @@
 </div>
 
 <script type="text/javascript">
-    function kasi_akses(id_menu){
+    function kasi_akses(id_menu) {
         //alert(id_menu);
         var id_menu = id_menu;
         var level = '<?php echo $this->uri->segment(3); ?>';
         //alert(level);
         $.ajax({
-            url:"<?php echo base_url()?>index.php/userlevel/kasi_akses_ajax",
-            data:"id_menu=" + id_menu + "&level="+ level ,
-            success: function(html)
-            { 
+            url: "<?php echo base_url() ?>index.php/userlevel/kasi_akses_ajax",
+            data: "id_menu=" + id_menu + "&level=" + level,
+            success: function(html) {
                 //load();
                 //alert('sukses');
             }
         });
-    }    
+    }
 </script>

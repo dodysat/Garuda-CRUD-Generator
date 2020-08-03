@@ -158,4 +158,3 @@ if (isset($_POST['generateall']))
     $hasil[] = $hasil_exportexcel;
     $hasil[] = $hasil_pdf;
 }
-?>

@@ -109,5 +109,3 @@ $string .= "\n\t\$this->db->limit(\$limit, \$start);
 
 
 $hasil_model = createFile($string, $target."models/" . $m_file);
-
-?>

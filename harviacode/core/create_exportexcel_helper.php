@@ -36,5 +36,3 @@ return;
 
 
 $hasil_exportexcel = createFile($string, $target."helpers/exportexcel_helper.php");
-
-?>

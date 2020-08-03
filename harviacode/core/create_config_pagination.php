@@ -44,5 +44,3 @@ $string = "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allo
 
 
 $hasil_config_pagination = createFile($string, $target."config/pagination.php");
-
-?>

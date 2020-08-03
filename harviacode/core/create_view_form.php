@@ -35,5 +35,3 @@ $string .= "\n\t</table></form>        </div>
 </div>";
 
 $hasil_view_form = createFile($string, $target."views/" . $c_url . "/" . $v_form_file);
-
-?>

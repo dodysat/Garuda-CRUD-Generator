@@ -1,0 +1,13 @@
+{
+  "description": "garuda-crud-generator",
+  "name": "dody/garuda-crud-generator",
+  "authors": [
+    {
+      "name": "Dody Satria",
+      "email": "dody.satria13@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^4.1"
+  }
+}

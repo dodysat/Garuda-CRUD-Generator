@@ -267,5 +267,3 @@ $string .= "\n\n}\n\n/* End of file $c_file */
 
 
 $hasil_controller = createFile($string, $target . "controllers/" . $c_file);
-
-?>

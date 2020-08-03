@@ -50,5 +50,3 @@ $string .=  "\t
 
 
 $hasil_view_pdf = createFile($string, $target."views/" . $c_url . "/" . $v_pdf_file);
-
-?>
