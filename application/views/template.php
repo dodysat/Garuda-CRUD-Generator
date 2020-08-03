@@ -22,6 +22,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/load-overlay.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/toastr.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -115,7 +117,7 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/jquery-ui/ui/minified/jquery-ui.min.js"></script>
     <!-- jQuery 3
         <script src="<?php echo base_url() ?>assets/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
@@ -136,6 +138,8 @@
     <!-- Select2 -->
     <script src="<?php echo base_url() ?>assets/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
     <!-- page script -->
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/load-overlay.js"></script>
+    <script type="text/javascript" src="<?php echo base_url() ?>assets/js/toastr.min.js"></script>
     <script>
         $(function() {
             $('.select2').select2()
