@@ -43,7 +43,7 @@
     $(function() {
         //autocomplete
         $("#name_user").autocomplete({
-            source: "<?php echo base_url() ?>/index.php/welcome/autocomplate",
+            source: "<?php echo site_url() ?>/welcome/autocomplate",
             minLength: 1
         });
     });
