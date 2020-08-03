@@ -18,12 +18,12 @@ class Harviacode
     {
         $subject = file_get_contents('../application/config/database.php');
         $string = str_replace("defined('BASEPATH') OR exit('No direct script access allowed');", "", $subject);
-
+        
         $con = 'core/connection.php';
         $create = fopen($con, "w") or die("Change your permision folder for application and harviacode folder to 777");
         fwrite($create, $string);
         fclose($create);
-
+        
         require $con;
 
         $this->host = $db['default']['hostname'];
@@ -32,18 +32,19 @@ class Harviacode
         $this->database = $db['default']['database'];
 
         $this->sql = new mysqli($this->host, $this->user, $this->password, $this->database);
-        if ($this->sql->connect_error) {
+        if ($this->sql->connect_error)
+        {
             echo $this->sql->connect_error . ", please check 'application/config/database.php'.";
             die();
         }
-
+        
         unlink($con);
     }
 
     function table_list()
     {
         $query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=?";
-        $stmt = $this->sql->prepare($query) or die("Error code :" . $this->sql->errno . " (not_primary_field)");
+        $stmt = $this->sql->prepare($query) OR die("Error code :" . $this->sql->errno . " (not_primary_field)");
         $stmt->bind_param('s', $this->database);
         $stmt->bind_result($table_name);
         $stmt->execute();
@@ -58,7 +59,7 @@ class Harviacode
     function primary_field($table)
     {
         $query = "SELECT COLUMN_NAME,COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME=? AND COLUMN_KEY = 'PRI'";
-        $stmt = $this->sql->prepare($query) or die("Error code :" . $this->sql->errno . " (primary_field)");
+        $stmt = $this->sql->prepare($query) OR die("Error code :" . $this->sql->errno . " (primary_field)");
         $stmt->bind_param('ss', $this->database, $table);
         $stmt->bind_result($column_name, $column_key);
         $stmt->execute();
@@ -71,7 +72,7 @@ class Harviacode
     function not_primary_field($table)
     {
         $query = "SELECT COLUMN_NAME,COLUMN_KEY,DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME=? AND COLUMN_KEY <> 'PRI'";
-        $stmt = $this->sql->prepare($query) or die("Error code :" . $this->sql->errno . " (not_primary_field)");
+        $stmt = $this->sql->prepare($query) OR die("Error code :" . $this->sql->errno . " (not_primary_field)");
         $stmt->bind_param('ss', $this->database, $table);
         $stmt->bind_result($column_name, $column_key, $data_type);
         $stmt->execute();
@@ -86,7 +87,7 @@ class Harviacode
     function all_field($table)
     {
         $query = "SELECT COLUMN_NAME,COLUMN_KEY,DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME=?";
-        $stmt = $this->sql->prepare($query) or die("Error code :" . $this->sql->errno . " (not_primary_field)");
+        $stmt = $this->sql->prepare($query) OR die("Error code :" . $this->sql->errno . " (not_primary_field)");
         $stmt->bind_param('ss', $this->database, $table);
         $stmt->bind_result($column_name, $column_key, $data_type);
         $stmt->execute();
@@ -97,6 +98,7 @@ class Harviacode
         $stmt->close();
         $this->sql->close();
     }
+
 }
 
 $hc = new Harviacode();

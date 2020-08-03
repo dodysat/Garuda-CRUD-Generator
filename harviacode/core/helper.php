@@ -27,3 +27,5 @@ function label($str)
     $label = ucwords($label);
     return $label;
 }
+
+?>
