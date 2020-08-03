@@ -69,26 +69,10 @@ $string .="\n\n    public function index()
 
 }
     
-$string .= "\n\n    public function read(\$id) 
-    {
-        \$row = \$this->" . $m . "->get_by_id(\$id);
-        if (\$row) {
-            \$data = array(";
-foreach ($all as $row) {
-    $string .= "\n\t\t'" . $row['column_name'] . "' => \$row->" . $row['column_name'] . ",";
-}
-$string .= "\n\t    );
-            \$this->template->load('template','$c_url/$v_read', \$data);
-        } else {
-            \$this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('$c_url'));
-        }
-    }
-
-    public function create() 
+$string .= "\n\n    public function create() 
     {
         \$data = array(
-            'button' => 'Create',
+            'button' => 'Tambah Data',
             'action' => site_url('$c_url/create_action'),";
 foreach ($all as $row) {
     $string .= "\n\t    '" . $row['column_name'] . "' => set_value('" . $row['column_name'] . "'),";
@@ -112,7 +96,7 @@ foreach ($non_pk as $row) {
 $string .= "\n\t    );
 
             \$this->".$m."->insert(\$data);
-            \$this->session->set_flashdata('message', 'Create Record Success 2');
+            \$this->session->set_flashdata('message', 'Data berhasil diinput');
             redirect(site_url('$c_url'));
         }
     }
@@ -123,7 +107,7 @@ $string .= "\n\t    );
 
         if (\$row) {
             \$data = array(
-                'button' => 'Update',
+                'button' => 'Ubah Data',
                 'action' => site_url('$c_url/update_action'),";
 foreach ($all as $row) {
     $string .= "\n\t\t'" . $row['column_name'] . "' => set_value('" . $row['column_name'] . "', \$row->". $row['column_name']."),";
@@ -131,7 +115,7 @@ foreach ($all as $row) {
 $string .= "\n\t    );
             \$this->template->load('template','$c_url/$v_form', \$data);
         } else {
-            \$this->session->set_flashdata('message', 'Record Not Found');
+            \$this->session->set_flashdata('message', 'Data tidak ditemukan');
             redirect(site_url('$c_url'));
         }
     }
@@ -150,7 +134,7 @@ foreach ($non_pk as $row) {
 $string .= "\n\t    );
 
             \$this->".$m."->update(\$this->input->post('$pk', TRUE), \$data);
-            \$this->session->set_flashdata('message', 'Update Record Success');
+            \$this->session->set_flashdata('message', 'Data Berhasil diperbarui');
             redirect(site_url('$c_url'));
         }
     }
@@ -161,10 +145,10 @@ $string .= "\n\t    );
 
         if (\$row) {
             \$this->".$m."->delete(\$id);
-            \$this->session->set_flashdata('message', 'Delete Record Success');
+            \$this->session->set_flashdata('message', 'Data berhasil dihapus');
             redirect(site_url('$c_url'));
         } else {
-            \$this->session->set_flashdata('message', 'Record Not Found');
+            \$this->session->set_flashdata('message', 'Data tidak ditemukan');
             redirect(site_url('$c_url'));
         }
     }
@@ -267,3 +251,5 @@ $string .= "\n\n}\n\n/* End of file $c_file */
 
 
 $hasil_controller = createFile($string, $target . "controllers/" . $c_file);
+
+?>

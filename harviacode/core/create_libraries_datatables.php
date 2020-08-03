@@ -566,3 +566,5 @@ $string = "<?php if(!defined('BASEPATH')) exit('No direct script access allowed'
 
 
 $hasil_config_pagination = createFile($string, $target."libraries/Datatables.php");
+
+?>

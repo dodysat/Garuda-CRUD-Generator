@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 31 Des 2017 pada 17.16
--- Versi Server: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Aug 03, 2020 at 12:40 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.3.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,34 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cigenerator`
+-- Database: `garuda_crud_generator`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_hak_akses`
+-- Table structure for table `karyawan`
+--
+
+CREATE TABLE `karyawan` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `jabatan` varchar(255) DEFAULT NULL,
+  `nomor_hp` varchar(25) DEFAULT NULL,
+  `alamat` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `karyawan`
+--
+
+INSERT INTO `karyawan` (`id`, `nama`, `jabatan`, `nomor_hp`, `alamat`) VALUES
+(1, 'Asep Setiawan', 'Supervisor', '08123456789', 'Jawa Barat, Indonesia');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_hak_akses`
 --
 
 CREATE TABLE `tbl_hak_akses` (
@@ -33,22 +56,23 @@ CREATE TABLE `tbl_hak_akses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_hak_akses`
+-- Dumping data for table `tbl_hak_akses`
 --
 
 INSERT INTO `tbl_hak_akses` (`id`, `id_user_level`, `id_menu`) VALUES
 (15, 1, 1),
 (19, 1, 3),
-(21, 2, 1),
 (24, 1, 9),
-(28, 2, 3),
-(29, 2, 2),
-(30, 1, 2);
+(30, 1, 2),
+(31, 1, 10),
+(32, 1, 11),
+(34, 1, 12),
+(35, 1, 13);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_menu`
+-- Table structure for table `tbl_menu`
 --
 
 CREATE TABLE `tbl_menu` (
@@ -57,23 +81,27 @@ CREATE TABLE `tbl_menu` (
   `url` varchar(30) NOT NULL,
   `icon` varchar(30) NOT NULL,
   `is_main_menu` int(11) NOT NULL,
-  `is_aktif` enum('y','n') NOT NULL COMMENT 'y=yes,n=no'
+  `is_aktif` enum('y','n') NOT NULL COMMENT 'y=yes,n=no',
+  `orderation` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_menu`
+-- Dumping data for table `tbl_menu`
 --
 
-INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `is_aktif`) VALUES
-(1, 'KELOLA MENU', 'kelolamenu', 'fa fa-server', 0, 'y'),
-(2, 'KELOLA PENGGUNA', 'user', 'fa fa-user-o', 0, 'y'),
-(3, 'level PENGGUNA', 'userlevel', 'fa fa-users', 0, 'y'),
-(9, 'Contoh Form', 'welcome/form', 'fa fa-id-card', 0, 'y');
+INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `is_aktif`, `orderation`) VALUES
+(1, 'Kelola Menu', 'kelolamenu', 'fa fa-caret-right', 11, 'y', NULL),
+(2, 'Kelola Pengguna', 'user', 'fa fa-caret-right', 11, 'y', NULL),
+(3, 'Level Pengguna', 'userlevel', 'fa fa-caret-right', 11, 'y', NULL),
+(9, 'Contoh Form', 'welcome/form', 'fa fa-id-card', 0, 'y', NULL),
+(10, 'Reset Password', 'reset_password', 'fa fa-caret-right', 11, 'y', NULL),
+(11, 'Setting Aplikasi', '#', 'fa fa-gears', 0, 'y', NULL),
+(13, 'Karyawan', 'karyawan', 'fa fa-users', 0, 'y', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_setting`
+-- Table structure for table `tbl_setting`
 --
 
 CREATE TABLE `tbl_setting` (
@@ -83,7 +111,7 @@ CREATE TABLE `tbl_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_setting`
+-- Dumping data for table `tbl_setting`
 --
 
 INSERT INTO `tbl_setting` (`id_setting`, `nama_setting`, `value`) VALUES
@@ -92,7 +120,7 @@ INSERT INTO `tbl_setting` (`id_setting`, `nama_setting`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -106,17 +134,16 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_users`, `full_name`, `email`, `password`, `images`, `id_user_level`, `is_aktif`) VALUES
-(1, 'Nuris Akbar M.Kom', 'nuris.akbar@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', 'atomix_user31.png', 1, 'y'),
-(3, 'Muhammad hafidz Muzaki', 'hafid@gmail.com', '$2y$04$Wbyfv4xwihb..POfhxY5Y.jHOJqEFIG3dLfBYwAmnOACpH0EWCCdq', '7.png', 2, 'y');
+(1, 'Super Admin', 'admin@admin.com', '$2y$04$T4OshGfXATjbyJcdPipcY.VbXJr8YTDlRSj2baDgpqiokQmiE9zpi', 'atomix_user31.png', 1, 'y');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user_level`
+-- Table structure for table `tbl_user_level`
 --
 
 CREATE TABLE `tbl_user_level` (
@@ -125,7 +152,7 @@ CREATE TABLE `tbl_user_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user_level`
+-- Dumping data for table `tbl_user_level`
 --
 
 INSERT INTO `tbl_user_level` (`id_user_level`, `nama_level`) VALUES
@@ -135,6 +162,12 @@ INSERT INTO `tbl_user_level` (`id_user_level`, `nama_level`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_hak_akses`
@@ -171,30 +204,42 @@ ALTER TABLE `tbl_user_level`
 --
 
 --
+-- AUTO_INCREMENT for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_hak_akses`
 --
 ALTER TABLE `tbl_hak_akses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
 --
 -- AUTO_INCREMENT for table `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
 --
 -- AUTO_INCREMENT for table `tbl_setting`
 --
 ALTER TABLE `tbl_setting`
   MODIFY `id_setting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `tbl_user_level`
 --
 ALTER TABLE `tbl_user_level`
   MODIFY `id_user_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

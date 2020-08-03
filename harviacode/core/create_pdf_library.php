@@ -33,3 +33,5 @@ class pdf {
 
 
 $hasil_pdf = createFile($string, $target."libraries/pdf.php");
+
+?>

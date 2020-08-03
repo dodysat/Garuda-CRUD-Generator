@@ -133,3 +133,5 @@ $string .= "\n\t
 
 
 $hasil_view_list = createFile($string, $target."views/" . $c_url . "/" . $v_list_file);
+
+?>

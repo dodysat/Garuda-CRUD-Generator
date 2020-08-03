@@ -18,19 +18,23 @@ class Menu_model extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id_menu,title,url,icon,is_main_menu,is_aktif');
+        $this->datatables->select('
+            tbl_menu.id_menu,
+            tbl_menu.title,
+            tbl_menu.url,
+            tbl_menu.icon,
+            tbl_menu.is_main_menu,
+            tbl_menu.is_aktif,
+            tbl_menu2.title as title_parent
+            ');
         $this->datatables->from('tbl_menu');
         $this->datatables->add_column('is_aktif', '$1', 'rename_string_is_aktif(is_aktif)');
         //add this line for join
-        //$this->datatables->join('table2', 'tbl_menu.field = table2.field');
+        $this->datatables->join('tbl_menu as tbl_menu2', 'tbl_menu.is_main_menu = tbl_menu2.id_menu', 'left');
         $this->datatables->add_column('action', anchor(site_url('kelolamenu/update/$1'), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm')) . " 
                 " . anchor(site_url('kelolamenu/delete/$1'), '<i class="fa fa-trash-o" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_menu');
         return $this->datatables->generate();
     }
-
-
-
-
 
     // get all
     function get_all()
