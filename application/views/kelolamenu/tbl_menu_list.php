@@ -55,7 +55,7 @@
                                     <th>Title</th>
                                     <th>Url</th>
                                     <th>Icon</th>
-                                    <th>Is Main Menu</th>
+                                    <th>Menu Utama</th>
                                     <th>Is Aktif</th>
                                     <th width="100px">Action</th>
                                 </tr>
@@ -89,4 +89,4 @@
         var t = $("#mytable").dataTable({
             initComplete: function() {
                 var api = this.api();
-                $(' #mytable_filter input') .off('.DT') .on('keyup.DT', function(e) { if (e.keyCode==13) { api.search(this.value).draw(); } }); }, oLanguage: { sProcessing: "loading..." }, processing: true, serverSide: true, ajax: {"url": "kelolamenu/json" , "type" : "POST" }, columns: [ { "data" : "id_menu" , "orderable" : false },{"data": "title" },{"data": "url" },{"data": "icon" },{"data": "is_main_menu" },{"data": "is_aktif" }, { "data" : "action" , "orderable" : false, "className" : "text-center" } ], order: [[0, 'desc' ]], rowCallback: function(row, data, iDisplayIndex) { var info=this.fnPagingInfo(); var page=info.iPage; var length=info.iLength; var index=page * length + (iDisplayIndex + 1); $('td:eq(0)', row).html(index); } }); }); </script>
+                $(' #mytable_filter input') .off('.DT') .on('keyup.DT', function(e) { if (e.keyCode==13) { api.search(this.value).draw(); } }); }, oLanguage: { sProcessing: "loading..." }, processing: true, serverSide: true, ajax: {"url": "kelolamenu/json" , "type" : "POST" }, columns: [ { "data" : "id_menu" , "orderable" : false },{"data": "title" },{"data": "url" },{"data": "icon" },{"data": "title_parent" },{"data": "is_aktif" }, { "data" : "action" , "orderable" : false, "className" : "text-center" } ], order: [[0, 'desc' ]], rowCallback: function(row, data, iDisplayIndex) { var info=this.fnPagingInfo(); var page=info.iPage; var length=info.iLength; var index=page * length + (iDisplayIndex + 1); $('td:eq(0)', row).html(index); } }); }); </script>
